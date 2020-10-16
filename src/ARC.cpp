@@ -154,12 +154,12 @@ void arc::verboseARCHeader(arc_s& header)
 
 void arc::verboseFileInfo(arc_file_s &f)
 {
-    float dec = __bswap_constant_32(f.DecompressedSize);
+    //float dec = __bswap_constant_32(f.DecompressedSize);
 
     printf("\n");
     printf("Filepath:           %s\n", f.Filename);
     printf("Ext hash:           0x%X\n", f.ExtentionHash);
     printf("Compressed size:    0x%X\n", f.CompressedSize);
-    printf("Decompressed size:  0x%X | Float: %f.f\n", f.DecompressedSize, dec);
+    printf("Decompressed size:  0x%X\n", f.DecompressedSize);
     printf("Data position:      0x%X\n", f.pDataPosition);
 }

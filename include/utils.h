@@ -5,5 +5,5 @@
 class Utils
 {
 public:
-    static std::fstream* openFile(char* path);
+    //static std::fstream* openFile(char* path);
 };
