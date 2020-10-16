@@ -1,11 +1,9 @@
-#ifndef UTILS_H
-#define UTILS_H
-
+#pragma once
+#include "types.h"
+#include <fstream>
 
 class Utils
 {
 public:
-    Utils();
+    static std::fstream* openFile(char* path);
 };
-
-#endif // UTILS_H

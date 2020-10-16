@@ -1,11 +1,6 @@
-#ifndef ZPIPE_H
-#define ZPIPE_H
+#pragma once
+#include <fstream>
+#include <vector>
 
-
-class zpipe
-{
-public:
-    zpipe();
-};
-
-#endif // ZPIPE_H
+int inf(FILE *source, FILE *dest);
+int inflate_mem(std::vector<char> &source, std::vector<char> &dest);
