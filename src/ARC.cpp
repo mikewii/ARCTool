@@ -59,7 +59,7 @@ void arc::formatFilesList(arc_s &header)
         else fixFileHeader(f);
 
         if(flags.isVerbose)
-            verboseFileInfo(f, count);
+            verboseFileInfo(f, count++);
 
         filesList.push_back(f);
     }
@@ -72,8 +72,6 @@ bool arc::extract(u32 id)
     file.seekg(std::ios::beg + filesList.at(id).pZData);
 
     u32 sz = filesList.at(id).CompressedSize;
-
-    //char temp[sz];
 
     v_in.resize(sz, 0);
     v_out.clear();
