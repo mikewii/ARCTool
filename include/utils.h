@@ -1,9 +1,9 @@
 #pragma once
 #include "types.h"
-#include <fstream>
 
 class Utils
 {
 public:
-    //static std::fstream* openFile(char* path);
+    static void bswap16(u16& x);
+    static void bswap32(u32& x);
 };

@@ -1,3 +1,5 @@
 Build
 Build/**
 *.exe
+*.user
+*.arc

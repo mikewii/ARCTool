@@ -1,26 +1,22 @@
 .SUFFIXES:
 
+CXX		:= x86_64-w64-mingw32-g++
+
 TOPDIR 		?= $(CURDIR)
 
 TARGET		:= arctool
 
 BUILD		:= Build
-INCLUDES	:= include \
-			/usr/include
-
-LIBS		:= -lz -lstdc++fs -static-libstdc++ -static-libgcc
+INCLUDES	:= include
 SOURCES		:= src
-
-CXX		:= x86_64-w64-mingw32-g++
-
+LIBS		:= -lz -lstdc++fs -static-libstdc++ -static-libgcc
 
 CFLAGS		:= $(INCLUDE) -std=gnu++17
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions 
-LDFLAGS		:= -Os --gc-sections -static
+LDFLAGS		:= -Os -static -Wl,--gc-sections,--strip-discarded,--strip-debug
 
 #---------------------------------------------------------------------------------
 ifneq ($(BUILD),$(notdir $(CURDIR)))
-#---------------------------------------------------------------------------------
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 export TOPDIR	:=	$(CURDIR)
@@ -51,7 +47,7 @@ $(BUILD):
 
 clean:
 	@echo clean ... 
-	@rm -fr $(BUILD)
+	@rm -fr $(BUILD) $(OUTPUT).exe
 
 re: clean all
 

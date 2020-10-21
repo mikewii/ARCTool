@@ -6,16 +6,19 @@
 #include <fstream>
 
 static const char ARC_MAGIC[5] = "ARC\0";
+static const char CRA_MAGIC[5] = "\0CRA";
+
+namespace fs = std::filesystem;
 
 class arc
 {
 private:
     struct arc_file_s {
         char    Filename[64];
-        u32     ExtentionHash;
+        u32     ResourceHash;
         u32 	CompressedSize;
         u32     DecompressedSize; // xor 20000000 + 40000000 if version is 17
-        u32     pDataPosition; // 78 9C - zlib header
+        u32     pZData; // 78 9C - zlib header
     };
 
     struct arc_s {
@@ -30,28 +33,47 @@ private:
     std::vector<char> v_out;
 
     std::fstream file;
-    arc_s header{0};
+    arc_s header;
     u32 FIX = 0;
     u32 err_count = 0;
 
 public:
-    static std::string cur_file;
-
     arc(const char* path);
     ~arc();
 
-    void versionFix(void);
+    void findEndianess(void);
+
+    void formatFilesList(arc_s& header);
 
     void verboseARCHeader(arc_s& header);
-    void formatFilesList(arc_s& header);
-    void verboseFileInfo(arc_file_s& f);
+    void verboseFileInfo(arc_file_s& f, u32 count);
 
-    void fixPath(arc_file_s& f);
+    void fixVersion(void);
+    void fixArcPath(arc_file_s& f);
+    void fixFileHeader(arc_file_s& f);
+    void fixFileHeaderBE(arc_file_s& f);
+    void fixHeaderBE(void);
 
-    bool decompress(u32 id);
-    bool decompressAll(void);
+    bool extract(u32 id);
+    bool extractAll(void);
 
     std::string extractExt(void);
 
     bool writeFile(u32 id);
+
+    union Flags{
+        u32 bitfield{0};
+        struct{
+            bool isArc : 1;
+            bool isBEndian : 1;
+            bool isLEndian : 1;
+
+            bool isVerbose : 1;
+            bool isNoAct : 1;
+            bool isExtract : 1;
+        };
+    };
+
+    static Flags flags;
+    static std::string cur_file;
 };
