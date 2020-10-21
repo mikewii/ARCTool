@@ -1,5 +1,6 @@
 #include "ARC.hpp"
 #include <string.h>
+#include <algorithm>
 #include <thread>
 
 #include "utils.h"
@@ -127,6 +128,7 @@ std::string arc::extractExt(void)
 
     }
 
+    if(flags.isBEndian) std::reverse(out.begin(), out.end());
     return out;
 }
 
