@@ -29,6 +29,7 @@ arc::arc(const char* path)
             fixVersion();
             formatFilesList(header);
         }
+        else printf("%s is not arc file!\n", path);
     }
     else printf("cant open file\n");
 }
@@ -112,6 +113,7 @@ std::string arc::extractExt(void)
 {
     std::string out;
     char ext[5];
+
     std::copy(v_out.begin(), v_out.begin() + 4, ext);
     ext[4] = '\0';
 

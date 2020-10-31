@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <typeinfo>
 
 static const char ARC_MAGIC[5] = "ARC\0";
 static const char CRA_MAGIC[5] = "\0CRA";
@@ -26,7 +27,6 @@ private:
         u16         Version;
         u16         FilesNum;
     };
-
 
     std::vector<arc_file_s> filesList;
     std::vector<char> v_in;

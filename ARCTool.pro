@@ -14,13 +14,15 @@ HEADERS += \
     include/mod.h \
     include/types.h \
     include/utils.h \
-    include/zpipe.h
+    include/zpipe.h \
+    include/mca.h
 
 SOURCES += \
     src/ARC.cpp \
     src/main.cpp \
     src/utils.cpp \
-    src/zpipe.cpp
+    src/zpipe.cpp \
+    include/mca.cpp
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
